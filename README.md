@@ -21,7 +21,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 ## ☕ Rodando scripts
 
-Para usar bot-bandeijao=unirio, siga estas etapas:
+Para usar bot-bandeijao-unirio, siga estas etapas:
 
 ```
 1- git clone https://github.com/rafael-ventura/bot-bandeijao-unirio
