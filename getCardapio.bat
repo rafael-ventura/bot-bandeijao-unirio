@@ -1,0 +1,1 @@
+python "C:\dev\autoBandeijao\bot-bandeijao-unirio\getImage.py"
