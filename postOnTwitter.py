@@ -2,16 +2,15 @@ import tweepy
 from getImage import semana
 import sys
 
-# client_id_oauth = TLIJO5vegIrOm66XgjrJg18LY5HpZtRBPhLOtFUWhqjSSprjbN
-# client_secret_oauth = TLIJO5vegIrOm66XgjrJg18LY5HpZtRBPhLOtFUWhqjSSprjbN
 
-api_key = "Aaqd1CS8swivr0f1Coz4Rm6ap"
-api_secret = "Qp7aAINIL7wCvhE9KaOtpvnOMKeRhjHpyjJPPFiLzADo2QF0Zj"
+#use youu own keys here
+api_key = ""
+api_secret = ""
 
-bearer_token = "AAAAAAAAAAAAAAAAAAAAAEn5kAEAAAAAbxkgzlLAW0AX8xQJY%2Fp0mxLf1Eg%3DUKoUEfvDoUT5mzbnd80Ma6UMQT3PqdFh6oCkG3MukIGF7yfQKy"
+bearer_token = ""
 
-access_token = "1601122308344762368-1y2jnJGelDT6wCo83GJPUYRhr15mPt"
-access_token_secret = "eCt9yzQ0043fyZ35NEypFkynMrc2eEIBWfkdMGvdEAf1b"
+access_token = ""
+access_token_secret = ""
 
 auth = tweepy.OAuth1UserHandler(api_key, api_secret, access_token,
                                 access_token_secret)
