@@ -3,9 +3,8 @@ from getImage import semana
 import sys
 from decouple import config
 
-# client_id_oauth = TLIJO5vegIrOm66XgjrJg18LY5HpZtRBPhLOtFUWhqjSSprjbN
-# client_secret_oauth = TLIJO5vegIrOm66XgjrJg18LY5HpZtRBPhLOtFUWhqjSSprjbN
 
+<<<<<<< HEAD
 api_key = config('API_KEY')
 api_secret = config('API_SECRET')
 
@@ -13,6 +12,16 @@ bearer_token = config('BEARER_TOKEN')
 
 access_token = config('ACCESS_TOKEN')
 access_token_secret = config('ACCESS_TOKEN_SECRET')
+=======
+#use youu own keys here
+api_key = ""
+api_secret = ""
+
+bearer_token = ""
+
+access_token = ""
+access_token_secret = ""
+>>>>>>> bcf4d4dc9f6e899879e0a33db0c37cb3f85602c1
 
 auth = tweepy.OAuth1UserHandler(api_key, api_secret, access_token,
                                 access_token_secret)
