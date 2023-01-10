@@ -1,1 +1,1 @@
-python "C:\dev\autoBandeijao\bot-bandeijao-unirio\getImage.py"
+python "C:\dev\autoBandeijao\bot-bandeijao-unirio\main.py"

@@ -1,25 +1,23 @@
-import sys
 import os.path
 import os
 from selenium import webdriver
+import chromedriver_autoinstaller
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-from subprocess import Popen
 import urllib
-import time
-## Setup chrome options
-chrome_options = Options()
+
+chromedriver_autoinstaller.install()
+browser = webdriver.Chrome()
+
+chrome_options = webdriver.Chrome_options()
+chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--no-sandbox")
-chrome_options.add_argument("--disable-gpu")
+chrome_options.add_argument("--disable-dev-shm-usage")
 
-# Set path to chromedriver as per your configuration
-homedir = os.path.expanduser("~")
-webdriver_service = Service(f"{homedir}/chromedriver/stable/chromedriver")
-
-# Choose Chrome Browser
-browser = webdriver.Chrome(service=webdriver_service, options=chrome_options)
+browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),
+                           options=chrome_options)
 browser.get(
     "http://www.unirio.br/prae/nutricao-prae-1/setan/restaurante-escola")
 browser.find_element(
