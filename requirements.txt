@@ -104,7 +104,6 @@ PyAutoGUI==0.9.53
 pycparser==2.21
 PyGetWindow==0.0.9
 Pygments==2.11.2
-PyGObject==3.42.1
 PyHamcrest==2.0.2
 PyJWT==2.3.0
 PyMsgBox==1.0.9
