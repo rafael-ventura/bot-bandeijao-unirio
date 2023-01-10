@@ -68,7 +68,7 @@ jupyterlab-widgets==3.0.3
 keyring==23.5.0
 kiwisolver==1.3.2
 launchpadlib==1.10.16
-lazr.restfulclient==0.14.4
+lazr.restfulclient==0.14.4git s
 lazr.uri==1.0.6
 lxml==4.8.0
 lz4==3.1.3+dfsg
@@ -100,7 +100,7 @@ Pillow==9.0.1
 ply==3.11
 portpicker==1.2.0
 prometheus-client==0.14.1
-prompt-toolkit==1.0.18
+prompt-toolkit==3.0.36
 psutil==5.9.2
 ptyprocess==0.7.0
 pyasn1==0.4.8
@@ -171,3 +171,7 @@ wsproto==1.2.0
 yapf==0.32.0
 zipp==1.0.0
 zope.interface==5.4.0
+Flask==1.1.2
+itsdangerous==1.1.0
+
+Werkzeug==1.0.1
