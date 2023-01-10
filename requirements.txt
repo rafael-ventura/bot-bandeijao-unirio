@@ -31,7 +31,6 @@ debugpy==1.6.3
 decorator==4.4.2
 defusedxml==0.7.1
 distro==1.7.0
-distro-info===1.1build1
 entrypoints==0.4
 et-xmlfile==1.1.0
 exceptiongroup==1.0.4
