@@ -20,7 +20,7 @@ charset-normalizer==2.1.1
 chromedriver-autoinstaller==0.4.0
 chromedriver-binary==108.0.5359.22.0
 click==8.0.3
-cloud-init==22.0
+cloud-init==22.2
 colorama==0.4.4
 command-not-found==0.3
 configobj==5.0.6
@@ -173,5 +173,4 @@ zipp==1.0.0
 zope.interface==5.4.0
 Flask==1.1.2
 itsdangerous==1.1.0
-
 Werkzeug==1.0.1
