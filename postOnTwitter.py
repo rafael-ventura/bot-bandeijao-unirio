@@ -1,5 +1,5 @@
 import tweepy
-from getImage import semana
+from main import semana
 import sys
 from decouple import config
 
