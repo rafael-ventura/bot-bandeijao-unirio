@@ -24,4 +24,3 @@ tweet = "Cardapio Bandeijao - Semana {}".format(semana)
 post_result = api.update_status(status=tweet,
                                 media_ids=[cardapio.media_id_string])
 sys.exit()
-#client.create_tweet(text="Ola Twitter, isto eh um teste.")
