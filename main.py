@@ -1,43 +1,74 @@
-import os.path
-import os
+import time
 from selenium import webdriver
-import chromedriver_autoinstaller
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-import urllib
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver import ActionChains
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from decouple import config
+import requests
 
-chromedriver_autoinstaller.install()
-browser = webdriver.Chrome()
+# Configuração do webdriver
+chrome_options = webdriver.ChromeOptions()
+chrome_options.binary_location = 'C:\\Users\\raf4a\\Downloads\\chrome-win64\\chrome-win64\\chrome.exe'
 
-chrome_options = webdriver.Chrome_options()
-chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("--no-sandbox")
-chrome_options.add_argument("--disable-dev-shm-usage")
+# Inicialização do webdriver
+browser = webdriver.Chrome(options=chrome_options)
 
-browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),
-                           options=chrome_options)
-browser.get(
-    "http://www.unirio.br/prae/nutricao-prae-1/setan/restaurante-escola")
-browser.find_element(
-    By.XPATH,
-    '//*[@id="parent-fieldname-text-f70fdc45550a457293b7aae9cc35d0fb"]/p[25]/a/img'
-).click()
-windows = browser.window_handles
-for w in windows:
-    if (w != browser.current_window_handle):
-        browser.switch_to.window(w)
+# Acessar o site
+browser.get("https://www.instagram.com/restaurante_escola_unirio/")
 
-img = browser.find_element(By.TAG_NAME, 'img')
-src = img.get_attribute('src')
+# Adicionando uma espera explícita para garantir que a página carregue
+element = WebDriverWait(browser, 10).until(
+    EC.presence_of_element_located((By.XPATH, '/html/body/div[2]/div/div/div[2]/div/div/div/div[1]/div[2]/section/main/div/div[3]/article/div[1]/div/div[1]/div[1]/a/div[1]/div[2]'))
+)
 
-name = src.split("/")
-semana = name[len(name) - 1]
+time.sleep(5)
 
-urllib.request.urlretrieve(
-    str(src),
-    "C:/dev/autoBandeijao/bot-bandeijao-unirio/cardapiosHist/cardapio_{}.jpg".
-    format(semana))
+# Crie uma instância de ActionChains
+actions = ActionChains(browser)
 
-exec(open('C:/dev/autoBandeijao/bot-bandeijao-unirio/postOnTwitter.py').read())
+# Realiza a ação de clicar
+actions.key_down(Keys.CONTROL).click(element).key_up(Keys.CONTROL).perform()
+
+# Aguarda um pouco antes de tentar encontrar os campos de login
+time.sleep(2)
+
+# Encontra os campos de entrada do nome de usuário e da senha, e o botão de login
+username_field = browser.find_element_by_xpath('/html/body/div[6]/div[1]/div/div[2]/div/div/div/div/div[2]/div/div[2]/div/div/div[1]/div[2]/form/div[1]/div[1]/div')
+password_field = browser.find_element_by_xpath('//*[@id="loginForm"]/div[1]/div[2]/div')
+login_button = browser.find_element_by_xpath('//*[@id="loginForm"]/div[1]/div[3]')
+
+# Preenche os campos de nome de usuário e senha
+username_field.send_keys(config('USERNAME')) 
+password_field.send_keys('PASSWORD') 
+
+# Clica no botão de login
+login_button.click()
+
+# Aguarda a página carregar após o login
+time.sleep(5)
+
+# Se uma nova guia foi aberta
+if len(browser.window_handles) > 1:
+    # Mude para a nova guia
+    browser.switch_to.window(browser.window_handles[1])
+
+    # Encontrar a imagem
+    img = browser.find_element(By.TAG_NAME, 'img')
+    src = img.get_attribute('src')
+
+    # Baixe a imagem
+    response = requests.get(src)
+    if response.status_code == 200:
+        with open('imagem.jpg', 'wb') as file:
+            file.write(response.content)
+    else:
+        print(f'Não foi possível baixar a imagem: {response.status_code}')
+else:
+    print(f'Não foi possível abrir uma nova guia após {max_attempts} tentativas.')
+    
+    
+
+browser.quit()
