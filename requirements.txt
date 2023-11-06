@@ -1,4 +1,4 @@
-﻿aiohttp==3.8.4
+aiohttp==3.8.4
 aiohttp-retry==2.8.3
 aiosignal==1.3.1
 asttokens==2.2.1
@@ -29,7 +29,8 @@ google-auth-oauthlib==1.0.0
 gspread==5.9.0
 httplib2==0.22.0
 idna==3.4
-ipykernel<6
+ipykernel==6.23.1
+ipython==8.13.2
 itsdangerous==2.1.2
 jedi==0.18.2
 Jinja2==3.1.2
