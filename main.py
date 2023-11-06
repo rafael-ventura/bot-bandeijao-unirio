@@ -1,13 +1,10 @@
-import time
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import time
+import urllib.request
 from decouple import config
-import requests
 
 # Configuração do webdriver
 chrome_options = webdriver.ChromeOptions()
@@ -16,59 +13,66 @@ chrome_options.binary_location = 'C:\\Users\\raf4a\\Downloads\\chrome-win64\\chr
 # Inicialização do webdriver
 browser = webdriver.Chrome(options=chrome_options)
 
-# Acessar o site
-browser.get("https://www.instagram.com/restaurante_escola_unirio/")
-
-# Adicionando uma espera explícita para garantir que a página carregue
-element = WebDriverWait(browser, 10).until(
-    EC.presence_of_element_located((By.XPATH, '/html/body/div[2]/div/div/div[2]/div/div/div/div[1]/div[2]/section/main/div/div[3]/article/div[1]/div/div[1]/div[1]/a/div[1]/div[2]'))
-)
-
+# Acessar o Instagram e logar
+browser.get("https://www.instagram.com/accounts/login/")
 time.sleep(5)
 
-# Crie uma instância de ActionChains
-actions = ActionChains(browser)
+# Login no Instagram (substitua 'your_username' e 'your_password' com suas credenciais)
+username_field = browser.find_element(By.NAME, 'username')
+password_field = browser.find_element(By.NAME, 'password')
+login_button = browser.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[3]/button/div')
 
-# Realiza a ação de clicar
-actions.key_down(Keys.CONTROL).click(element).key_up(Keys.CONTROL).perform()
 
-# Aguarda um pouco antes de tentar encontrar os campos de login
-time.sleep(2)
-
-# Encontra os campos de entrada do nome de usuário e da senha, e o botão de login
-username_field = browser.find_element_by_xpath('/html/body/div[6]/div[1]/div/div[2]/div/div/div/div/div[2]/div/div[2]/div/div/div[1]/div[2]/form/div[1]/div[1]/div')
-password_field = browser.find_element_by_xpath('//*[@id="loginForm"]/div[1]/div[2]/div')
-login_button = browser.find_element_by_xpath('//*[@id="loginForm"]/div[1]/div[3]')
-
-# Preenche os campos de nome de usuário e senha
-username_field.send_keys(config('USERNAME')) 
-password_field.send_keys('PASSWORD') 
-
-# Clica no botão de login
+username_field.send_keys(config('NOME')) 
+password_field.send_keys(config('PASSWORD'))
 login_button.click()
 
-# Aguarda a página carregar após o login
-time.sleep(5)
+# # Esperar pela navegação pós-login e redirecionamento para o feed
+# WebDriverWait(browser, 10).until(
+#     EC.presence_of_element_located((By.XPATH, '//div[contains(@class, " _ac7v _aang")]'))
+# )
+time.sleep(10)
+browser.get("https://www.instagram.com/fotochapando")
 
-# Se uma nova guia foi aberta
-if len(browser.window_handles) > 1:
-    # Mude para a nova guia
-    browser.switch_to.window(browser.window_handles[1])
+time.sleep(10)
+# Navegar para a página do perfil desejado
+profile_url = "https://www.instagram.com/restaurante_escola_unirio/"
+browser.get(profile_url)
+# WebDriverWait(browser, 10).until(
+#     EC.presence_of_element_located((By.XPATH, '//div[contains(@class, "_aa_7")]'))
+# )
+time.sleep(10)
+# Encontrar a primeira foto fixada e clicar
+first_photo = browser.find_element(By.XPATH, '/html/body/div[2]/div/div/div[2]/div/div/div/div[1]/div[1]/div[2]/div[2]/section/main/div/div[3]/article/div[1]/div/div[1]/div[1]/a')
+linkfirst_photo= first_photo.get_attribute('href')
+browser.get(linkfirst_photo)
 
-    # Encontrar a imagem
-    img = browser.find_element(By.TAG_NAME, 'img')
-    src = img.get_attribute('src')
+# Esperar para que o modal da imagem abra e obter o URL do post
+WebDriverWait(browser, 10).until(
+    EC.presence_of_element_located((By.XPATH, '//div[contains(@class, "_aagw")]'))
+)
+post_url = browser.current_url
 
-    # Baixe a imagem
-    response = requests.get(src)
-    if response.status_code == 200:
-        with open('imagem.jpg', 'wb') as file:
-            file.write(response.content)
-    else:
-        print(f'Não foi possível baixar a imagem: {response.status_code}')
-else:
-    print(f'Não foi possível abrir uma nova guia após {max_attempts} tentativas.')
-    
-    
+# Abrir o post em uma nova guia
+browser.execute_script("window.open(arguments[0]);", post_url)
+time.sleep(2)
 
+# Alternar para a nova guia aberta com o post
+browser.switch_to.window(browser.window_handles[1])
+WebDriverWait(browser, 10).until(
+    EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/section/main/div/div/article/div[2]/div/div/div[2]/div/div/div/ul/li[2]/div/div/div/div[1]/img'))
+)
+
+# Encontrar a imagem dentro do post e obter o URL da imagem
+image = browser.find_element(By.XPATH, '/html/body/div[1]/section/main/div/div/article/div[2]/div/div/div[2]/div/div/div/ul/li[2]/div/div/div/div[1]/img')
+image_url = image.get_attribute('src')
+
+# Baixar a imagem
+urllib.request.urlretrieve(image_url, "foto_do_post.jpg")
+
+# Fechar a guia do post e voltar para a guia original
+browser.close()
+browser.switch_to.window(browser.window_handles[0])
+
+# Fechar o navegador
 browser.quit()
