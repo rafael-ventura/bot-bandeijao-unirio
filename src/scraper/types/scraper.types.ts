@@ -1,5 +1,4 @@
 export interface ScrapingResult {
-  imageUrl: string;
   weekId: string;
   savedPath: string;
 }

@@ -4,7 +4,9 @@ import { WeeklyMenu, DailyMenu } from '../types/menu';
 export class MenuOCR {
   async processImage(imagePath: string): Promise<WeeklyMenu> {
     try {
-      const worker = await tesseract.createWorker('por');
+      const worker = await tesseract.createWorker();
+      await worker.loadLanguage('por');
+      await worker.initialize('por');
       const { data: { text } } = await worker.recognize(imagePath);
       await worker.terminate();
 

@@ -4,6 +4,8 @@
   "description": "Sistema de cardápio do Restaurante Escola da UNIRIO",
   "scripts": {
     "scrape": "ts-node src/scraper/index.ts",
+    "scrape:image": "ts-node src/scraper/scrape.ts",
+    "scrape:ocr": "ts-node src/scraper/services/ocr.service.ts",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
