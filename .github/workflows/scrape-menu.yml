@@ -1,0 +1,41 @@
+name: Scrape Weekly Menu
+
+on:
+  schedule:
+    - cron: '0 0 * * MON'  # Executa toda segunda-feira à meia-noite
+  workflow_dispatch:  # Permite execução manual
+    inputs:
+      force_update:
+        description: 'Forçar atualização mesmo se já existir'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Setup Google Sheets Authentication
+        run: |
+          echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT }}" > google-credentials.json
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ./google-credentials.json
+        
+      - name: Run scraper
+        run: npm run scrape
+        env:
+          FORCE_UPDATE: ${{ github.event.inputs.force_update }}
+        
+      - name: List captured files
+        run: ls -la data/history/ 

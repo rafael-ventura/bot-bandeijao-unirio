@@ -1,1 +1,0 @@
-python "C:\dev\autoBandeijao\bot-bandeijao-unirio\main.py"
