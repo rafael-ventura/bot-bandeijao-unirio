@@ -1,0 +1,405 @@
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #2c3e50 0%, // Azul escuro
+    #34495e 100% // Azul mais claro
+  );
+  position: relative;
+  overflow: hidden;
+  color: #e0e0e0; // Texto claro
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      circle at top right,
+      rgba(255, 107, 107, 0.1) 0%,
+      transparent 60%
+    );
+    pointer-events: none;
+  }
+}
+
+.main-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+// Brand Container
+.brand-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.logo-section {
+  .logo {
+    width: 200px;
+    height: auto;
+    margin-left: -10%;
+  }
+}
+
+.title-section {
+  .brand-title {
+    display: flex;
+    flex-direction: column;
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.5;
+    margin: 0;
+    span {
+      display: block;
+      background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(255, 107, 107, 0.3);
+
+      &:last-child {
+        font-size: 4rem;
+        margin-top: -0.5rem;
+      }
+    }
+  }
+}
+
+// Main Info Sections
+.main-info {
+  .section {
+    margin-bottom: 3rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.section-title {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  text-align: left;
+  position: relative;
+  padding-left: 1rem;
+  border-left: 4px solid #ff6b6b;
+}
+
+// Schedule Section
+.schedule-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.schedule-card {
+  background: rgba(255, 255, 255, 0.1); // Fundo levemente transparente
+  border: 2px solid rgba(255, 255, 255, 0.2); // Borda clara
+  border-radius: 1rem; // Bordas arredondadas
+  transition: transform 0.3s ease, background 0.3s ease;
+
+  .schedule-info {
+    padding: 1.5rem;
+    text-align: center;
+
+    i {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin: 0.5rem 0;
+      color: #ffffff;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0;
+    }
+  }
+}
+
+// Specific hover styles for lunch and dinner cards
+.schedule-card-almoco:hover {
+  transform: translateY(-10px);
+  background: #f2c71b; // Cor de fundo para o hover do almoço
+}
+
+.schedule-card-janta:hover {
+  transform: translateY(-10px);
+  background: #f87474; // Cor de fundo para o hover do jantar
+}
+
+// Prices Section
+.prices-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); // Três colunas de tamanho igual
+  gap: 1.5rem;
+}
+
+.price-card {
+  background: rgba(255, 255, 255, 0.1); // Fundo levemente transparente
+  border: 2px solid rgba(255, 255, 255, 0.2); // Borda clara
+  border-radius: 1rem; // Bordas arredondadas
+  transition: transform 0.3s ease, background 0.3s ease;
+
+  &:hover {
+    transform: translateY(-10px);
+    background: #45619c; // Cor de fundo para o hover dos cards de valores
+  }
+
+  .price-info {
+    padding: 1.5rem;
+    text-align: center;
+
+    h3 {
+      font-size: 1.5rem;
+      margin: 0.5rem 0;
+      color: #ffffff;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0;
+    }
+  }
+}
+
+// Composition Section
+.composition-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+
+  .composition-item {
+    text-align: left;
+    padding: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+
+    i {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      margin-top: 0.2rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin: 0 0 0.5rem 0;
+      color: #ffffff;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  }
+}
+
+// Action Cards
+.action-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.action-card {
+  background: rgba(139, 0, 0, 0.3) !important;
+  border: none !important;
+  transition: transform 0.2s, background 0.3s;
+
+  &:hover {
+    transform: translateY(-5px);
+    background: rgba(139, 0, 0, 0.4) !important;
+  }
+
+  .action-content {
+    padding: 1.5rem;
+
+    h3 {
+      font-size: 1.3rem;
+      color: #ff6b6b;
+      margin: 0 0 1.5rem 0;
+      text-align: left;
+    }
+  }
+}
+
+// Subscription Form
+.subscription-form {
+  .input-group {
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 100%; // 100% de largura
+
+    input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      padding: 0.5rem 1rem;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    button {
+      border-radius: 1.5rem;
+      width: 100%; // 100% de largura
+      height: 100%; // 100% de altura
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ff6b6b; // Cor do botão
+      border: none;
+
+      &:hover {
+        background: #ff8585;
+      }
+
+      i {
+        margin-right: 0.5rem; // Espaço entre ícone e texto
+      }
+    }
+  }
+}
+
+// Telegram Button
+.telegram-button {
+  width: 100%;
+  border-radius: 2rem !important;
+  padding: 1rem !important;
+  background: #0088cc !important; // Cor azul para o botão
+  border: none !important;
+  font-size: 1.1rem !important;
+
+  &:hover {
+    background: #0099e6 !important; // Cor mais clara ao passar o mouse
+  }
+}
+
+// Social Badges
+.social-badges {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+
+  button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50% !important;
+
+    &.github-badge {
+      background: #333 !important;
+      border: none !important;
+      &:hover { background: #444 !important; }
+    }
+
+    &.linkedin-badge {
+      background: #0077b5 !important;
+      border: none !important;
+      &:hover { background: #0088cc !important; }
+    }
+
+    &.portfolio-badge {
+      background: #ff6b6b !important;
+      border: none !important;
+      &:hover { background: #ff8585 !important; }
+    }
+  }
+}
+
+// Notice Card
+.notice-card {
+  background: rgba(139, 0, 0, 0.3) !important;
+  border: none !important;
+}
+
+.notice-content {
+  i {
+    color: #ff6b6b;
+  }
+
+  .portal-link {
+    color: #ff6b6b;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 1024px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .main-info {
+    order: 1;
+  }
+
+  .sidebar {
+    order: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .schedule-cards,
+  .prices-grid,
+  .composition-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .composition-item {
+    flex-direction: column;
+    text-align: center;
+
+    i {
+      margin: 0 0 1rem 0;
+    }
+  }
+}

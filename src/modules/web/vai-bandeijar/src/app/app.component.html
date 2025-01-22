@@ -1,0 +1,103 @@
+<div class="app-container">
+  <main class="main-content">
+    <div class="content-grid">
+      <!-- Left Column - Brand & Actions -->
+      <div class="sidebar">
+        <!-- Brand Section -->
+        <p-card styleClass="brand-card">
+          <div class="brand-container">
+            <div class="logo-section">
+              <img src="assets/logo.png" alt="Logo UNIRIO" class="logo" />
+            </div>
+            <div class="title-section">
+              <h1 class="brand-title">
+                <span>Vai</span>
+                <span>Bandeijar?</span>
+              </h1>
+            </div>
+          </div>
+        </p-card>
+
+        <div class="action-cards">
+          <!-- Email Subscription -->
+          <app-subscription-form></app-subscription-form>
+
+          <!-- Telegram Button -->
+          <p-card styleClass="action-card">
+            <div class="action-content">
+              <h3>Canal no Telegram</h3>
+              <button pButton class="telegram-button" icon="pi pi-send" label="Acessar Canal"
+                (click)="openTelegram()"></button>
+            </div>
+          </p-card>
+
+          <!-- Social Links -->
+          <app-social-links></app-social-links>
+
+          <!-- Notice Card -->
+          <p-card styleClass="notice-card">
+            <div class="notice-content">
+              <i class="pi pi-info-circle"></i>
+              <p>É obrigatória a apresentação da carteirinha de identificação.
+                <a (click)="openIdPortal()" class="portal-link">Solicitar carteirinha</a>
+              </p>
+            </div>
+          </p-card>
+        </div>
+      </div>
+
+      <!-- Right Column - Main Info -->
+      <div class="main-info">
+        <!-- Horários Section -->
+        <section class="section schedule-section">
+          <h2 class="section-title">Horário de Funcionamento</h2>
+          <div class="schedule-cards">
+            <p-card class="schedule-card schedule-card-almoco">
+              <div class="schedule-info">
+                <i class="pi pi-sun"></i>
+                <h3>Almoço</h3>
+                <p>{{mealSchedule.lunch}}</p>
+              </div>
+            </p-card>
+            <p-card class="schedule-card schedule-card-janta">
+              <div class="schedule-info">
+                <i class="pi pi-moon"></i>
+                <h3>Jantar</h3>
+                <p>{{mealSchedule.dinner}}</p>
+              </div>
+            </p-card>
+          </div>
+        </section>
+
+        <!-- Valores Section -->
+        <section class="section prices-section">
+          <h2 class="section-title">Valores</h2>
+          <div class="prices-grid">
+            <p-card *ngFor="let price of prices" class="price-card">
+              <div class="price-info">
+                <h3>{{price.category}}</h3>
+                <p class="price-value">{{price.value}}</p>
+              </div>
+            </p-card>
+          </div>
+        </section>
+
+        <!-- Composição Section -->
+        <section class="section composition-section">
+          <h2 class="section-title">Composição das Refeições</h2>
+          <div class="composition-grid">
+            <p-card *ngFor="let item of mealComposition" styleClass="composition-card">
+              <div class="composition-item">
+                <i [class]="item.icon"></i>
+                <h3>{{item.title}}</h3>
+                <p>{{item.description}}</p>
+              </div>
+            </p-card>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <app-footer></app-footer>
+</div>

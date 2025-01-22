@@ -1,0 +1,71 @@
+.action-card {
+  ::ng-deep .p-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+.action-content {
+  text-align: left;
+  padding: 0.5rem;
+
+  h3 {
+    margin: 0 0 1rem;
+    color: #ffffff;
+    font-size: 1.3rem;
+  }
+}
+
+.subscription-form {
+  .input-group {
+    display: flex;
+    gap: 0.5rem;
+    background: transparent;
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: rgba(255, 255, 255, 0.4);
+        background: rgba(255, 255, 255, 0.15);
+      }
+    }
+
+    button {
+      background: #ff6b6b !important;
+      border: none !important;
+      padding: 0.75rem 1.25rem !important;
+      border-radius: 0.5rem !important;
+      transition: all 0.3s ease !important;
+
+      &:hover {
+        background: #ff8585 !important;
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+
+      .p-button-icon {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}

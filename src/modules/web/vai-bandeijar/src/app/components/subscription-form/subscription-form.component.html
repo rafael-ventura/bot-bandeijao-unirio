@@ -1,0 +1,28 @@
+<p-card styleClass="action-card">
+  <div class="action-content">
+    <h3>Receba o Cardápio</h3>
+    <div class="subscription-form">
+      <form (ngSubmit)="subscribeEmail()" #subscriptionForm="ngForm">
+        <div class="input-group">
+          <input
+            type="email"
+            pInputText
+            placeholder="Digite seu email"
+            [(ngModel)]="email"
+            name="email"
+            required
+            email
+            #emailInput="ngModel"
+            [ngClass]="{'ng-invalid': emailInput.invalid && emailInput.touched}"
+          />
+          <button
+            pButton
+            type="submit"
+            icon="pi pi-send"
+            [disabled]="!subscriptionForm.form.valid"
+          ></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</p-card>
