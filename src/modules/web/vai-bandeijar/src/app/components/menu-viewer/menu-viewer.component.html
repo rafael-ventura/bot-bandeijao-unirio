@@ -1,0 +1,15 @@
+<p-card styleClass="menu-viewer-card">
+  <div class="menu-viewer-content">
+    <button
+      pButton
+      [label]="isMenuVisible ? 'Ocultar Cardápio' : 'Ver Cardápio'"
+      [icon]="isMenuVisible ? 'pi pi-eye-slash' : 'pi pi-eye'"
+      (click)="toggleMenu()"
+      class="menu-toggle-button"
+    ></button>
+
+    <div class="menu-image-container" *ngIf="isMenuVisible" [@slideInOut]>
+      <img [src]="menuImagePath" alt="Cardápio do Bandejão" class="menu-image" />
+    </div>
+  </div>
+</p-card>

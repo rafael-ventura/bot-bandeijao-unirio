@@ -1,0 +1,56 @@
+.menu-viewer-card {
+  ::ng-deep .p-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+  }
+}
+
+.menu-viewer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.menu-toggle-button {
+  width: 100%;
+  background: linear-gradient(135deg, #ff6b6b, #ff8585) !important;
+  border: none !important;
+  padding: 1rem !important;
+  border-radius: 0.5rem !important;
+  font-size: 1.1rem !important;
+  transition: all 0.3s ease !important;
+
+  &:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  .p-button-icon {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+  }
+}
+
+.menu-image-container {
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.2);
+
+  .menu-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+}

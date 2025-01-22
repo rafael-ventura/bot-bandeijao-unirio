@@ -1,41 +1,88 @@
-import * as path from 'path';
 import { Logger } from '../../shared/utils/logger';
-import { HttpClient } from '../../shared/utils/http';
-import { FileUtils } from '../../shared/utils/file';
-import { ImageDownloadOptions } from '../types/scraper.types';
+import path from 'path';
+import fs from 'fs';
+
+interface ImageDownloaderConfig {
+  outputDir: string;
+}
 
 export class ImageDownloaderService {
-  private readonly defaultOptions: ImageDownloadOptions = {
-    baseUrl: 'https://www.unirio.br',
-    outputDir: path.join(__dirname, '../../../data/history')
-  };
+  private readonly outputDir: string;
+  private readonly assetsDir: string;
+  private readonly indexPath: string;
 
-  constructor(private options: ImageDownloadOptions) {
-    this.options = { ...this.defaultOptions, ...options };
+  constructor(config: ImageDownloaderConfig) {
+    this.outputDir = config.outputDir;
+    this.assetsDir = path.join(__dirname, '../../../modules/web/vai-bandeijar/src/assets/cardapios');
+    this.indexPath = path.join(this.assetsDir, 'index.json');
+    this.ensureDirectoriesExist();
   }
 
-  public async downloadImage(imageUrl: string, filename: string): Promise<string> {
-    try {
-      const fullImageUrl = this.getFullImageUrl(imageUrl);
-      const imagePath = path.join(this.options.outputDir, filename);
-      
-      const imageData = await HttpClient.get<Buffer>(fullImageUrl, {
-        responseType: 'arraybuffer'
-      });
-      
-      await FileUtils.writeFile(imagePath, imageData);
-      Logger.info(`Image saved successfully to: ${imagePath}`);
+  private ensureDirectoriesExist() {
+    [this.outputDir, this.assetsDir].forEach(dir => {
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+    });
 
-      return imagePath;
-    } catch (error) {
-      Logger.error('Failed to download image', error as Error);
-      throw error;
+    // Criar index.json se não existir
+    if (!fs.existsSync(this.indexPath)) {
+      fs.writeFileSync(this.indexPath, '[]');
     }
   }
 
-  private getFullImageUrl(imageUrl: string): string {
-    return imageUrl.startsWith('http') 
-      ? imageUrl 
-      : `${this.options.baseUrl}${imageUrl}`;
+  private updateIndex(newFilename: string) {
+    try {
+      let files: string[] = [];
+      
+      // Ler index atual
+      if (fs.existsSync(this.indexPath)) {
+        files = JSON.parse(fs.readFileSync(this.indexPath, 'utf-8'));
+      }
+
+      // Adicionar novo arquivo se não existir
+      if (!files.includes(newFilename)) {
+        files.push(newFilename);
+      }
+
+      // Salvar index atualizado
+      fs.writeFileSync(this.indexPath, JSON.stringify(files, null, 2));
+      Logger.info(`Updated index.json with ${newFilename}`);
+    } catch (error) {
+      Logger.error('Failed to update index.json', error as Error);
+    }
+  }
+
+  public async downloadImage(url: string, filename: string): Promise<{ historyPath: string, assetsPath: string }> {
+    try {
+      const response = await fetch(url);
+      const buffer = await response.arrayBuffer();
+
+      // Salvar na pasta histórica
+      const historyPath = path.join(this.outputDir, filename);
+      fs.writeFileSync(historyPath, Buffer.from(buffer));
+      Logger.info(`Image saved to history: ${historyPath}`);
+
+      // Salvar na pasta de assets
+      const assetsPath = path.join(this.assetsDir, filename);
+      fs.writeFileSync(assetsPath, Buffer.from(buffer));
+      Logger.info(`Image saved to assets: ${assetsPath}`);
+
+      // Atualizar o arquivo latest.jpg na pasta de assets
+      const latestPath = path.join(this.assetsDir, 'latest.jpg');
+      fs.copyFileSync(assetsPath, latestPath);
+      Logger.info(`Updated latest.jpg in assets`);
+
+      // Atualizar index.json
+      this.updateIndex(filename);
+
+      return {
+        historyPath,
+        assetsPath
+      };
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      throw new Error(`Failed to download image: ${errorMessage}`);
+    }
   }
 } 

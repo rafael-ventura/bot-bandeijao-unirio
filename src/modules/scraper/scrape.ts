@@ -35,11 +35,12 @@ class MenuScraper {
 
       // Baixar a imagem
       const imageDownloader = new ImageDownloaderService({ outputDir: path.join(__dirname, '../../../data/history') });
-      const savedPath = await imageDownloader.downloadImage(imageUrl, `cardapio_${dateStr.replace(/\s+/g, '-')}.jpg`);
+      const { historyPath, assetsPath } = await imageDownloader.downloadImage(imageUrl, `cardapio_${dateStr.replace(/\s+/g, '-')}.jpg`);
 
       return {
         weekId: dateStr,
-        savedPath: savedPath
+        savedPath: historyPath,
+        assetsPath: assetsPath
       };
     } catch (error: unknown) {
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';

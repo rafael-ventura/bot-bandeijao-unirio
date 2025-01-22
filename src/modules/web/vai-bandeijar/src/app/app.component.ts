@@ -7,6 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SocialLinksComponent } from './components/social-links/social-links.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SubscriptionFormComponent } from './components/subscription-form/subscription-form.component';
+import { MenuViewerComponent } from './components/menu-viewer/menu-viewer.component';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,8 @@ import { SubscriptionFormComponent } from './components/subscription-form/subscr
     InputTextModule,
     SocialLinksComponent,
     FooterComponent,
-    SubscriptionFormComponent
+    SubscriptionFormComponent,
+    MenuViewerComponent
   ]
 })
 export class AppComponent {

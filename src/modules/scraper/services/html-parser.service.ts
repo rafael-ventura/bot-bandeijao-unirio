@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio';
-import { Logger } from '../../utils/logger';
+import { Logger } from '../../shared/utils/logger';
 
 export class HtmlParserService {
   private readonly selector: string;
