@@ -3,8 +3,18 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
-  max-width: 80%;
+  max-width: 100%;
   margin: 0 auto;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
+
+  @media (max-width: 430px) {
+    grid-template-columns: 1fr;
+    padding: 0 0.5rem;
+  }
 }
 
 .schedule-card {
@@ -12,27 +22,47 @@
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 1rem;
   transition: transform 0.3s ease, background 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
 
   .schedule-info {
     padding: 1.2rem;
     text-align: center;
 
+    @media (max-width: 430px) {
+      padding: 0.75rem;
+    }
+
     i {
       font-size: 1.8rem;
       color: var(--primary-color);
       margin-bottom: 0.8rem;
+
+      @media (max-width: 430px) {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+      }
     }
 
     h3 {
       font-size: 1.3rem;
       margin: 0.3rem 0;
       color: #ffffff;
+
+      @media (max-width: 430px) {
+        font-size: 1.1rem;
+        margin: 0.2rem 0;
+      }
     }
 
     p {
       font-size: 1.1rem;
       color: rgba(255, 255, 255, 0.7);
       margin: 0;
+
+      @media (max-width: 430px) {
+        font-size: 0.9rem;
+      }
     }
   }
 }
@@ -52,6 +82,17 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
+
+  @media (max-width: 430px) {
+    grid-template-columns: 1fr;
+    padding: 0 0.5rem;
+  }
 }
 
 .price-card {
@@ -59,6 +100,8 @@
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 1rem;
   transition: transform 0.3s ease, background 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
 
   &:nth-child(1):hover {  // Estudante - tom mais claro
     transform: translateY(-10px);
@@ -79,20 +122,33 @@
     padding: 1.2rem;
     text-align: center;
 
+    @media (max-width: 430px) {
+      padding: 0.75rem;
+    }
+
     h3 {
       font-size: 1.3rem;
       margin: 0.3rem 0;
       color: #ffffff;
+
+      @media (max-width: 430px) {
+        font-size: 1.1rem;
+        margin: 0.2rem 0;
+      }
     }
 
     .price-value {
       font-size: 1.4rem;
-      color: #FFD700;  // Todo o valor em amarelo
+      color: #FFD700;
       margin: 0;
       font-weight: bold;
 
+      @media (max-width: 430px) {
+        font-size: 1.2rem;
+      }
+
       .currency {
-        color: #FFD700;  // Mantendo o cifrão amarelo
+        color: #FFD700;
       }
     }
   }
@@ -149,9 +205,16 @@
   margin-bottom: 1.5rem;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 1rem;
-  padding: 1.2rem 1.5rem;
+  padding: 1.2rem;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 430px) {
+    padding: 1rem 0.5rem;
+    margin-bottom: 1rem;
+  }
 
   &:last-child {
     margin-bottom: 0;
@@ -167,6 +230,12 @@
   position: relative;
   padding-left: 1rem;
   border-left: 4px solid #ff6b6b;
+
+  @media (max-width: 430px) {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    padding: 0 0.5rem 0 1rem;
+  }
 }
 
 // Responsive adjustments

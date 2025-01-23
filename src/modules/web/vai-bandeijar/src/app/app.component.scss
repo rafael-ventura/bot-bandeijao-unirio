@@ -1,12 +1,13 @@
 .app-container {
   min-height: 100vh;
+  min-width: 390px;
   background: linear-gradient(
     135deg,
     #2c3e50 0%, // Azul escuro
     #34495e 100% // Azul mais claro
   );
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
   color: #e0e0e0; // Texto claro
 
   &::before {
@@ -27,12 +28,14 @@
 
 .main-content {
   max-width: 1600px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem 0.5rem;
+  padding: 2rem 1rem;
   position: relative;
+  box-sizing: border-box;
 
-  @media (max-width: 768px) {
-    padding: 1rem;
+  @media (max-width: 430px) {
+    padding: 1rem 0.5rem;
   }
 }
 
@@ -40,10 +43,16 @@
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 6rem;
+  width: 100%;
+  box-sizing: border-box;
 
   @media (max-width: 1024px) {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  @media (max-width: 430px) {
+    gap: 1rem;
   }
 }
 
@@ -57,12 +66,21 @@
   padding: 2rem;
   border-radius: 1rem;
   backdrop-filter: blur(10px);
+  box-sizing: border-box;
+  width: 100%;
 
   @media (max-width: 768px) {
+    gap: 1.5rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 430px) {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
     text-align: center;
-    padding: 1rem;
   }
 }
 
@@ -73,7 +91,12 @@
     margin-left: -5%;
 
     @media (max-width: 768px) {
-      width: 100px;
+      width: 120px;
+      margin-left: -2%;
+    }
+
+    @media (max-width: 430px) {
+      width: 80px;
       margin: 0 auto;
     }
   }
@@ -90,29 +113,18 @@
 
     @media (max-width: 1024px) {
       font-size: 4rem;
-
-      span:last-child {
-        font-size: 4rem;
-      }
+      line-height: 1.3;
     }
 
     @media (max-width: 768px) {
       font-size: 3.5rem;
       line-height: 1.2;
-
-      span:last-child {
-        font-size: 3.5rem;
-        margin-top: -0.4rem;
-      }
     }
 
-    @media (max-width: 480px) {
-      font-size: 2.8rem;
-
-      span:last-child {
-        font-size: 2.8rem;
-        margin-top: -0.3rem;
-      }
+    @media (max-width: 430px) {
+      font-size: 2.5rem;
+      line-height: 1.1;
+      text-align: center;
     }
 
     span {
@@ -126,9 +138,13 @@
       animation: gradientShift 5s ease-in-out infinite, pulse 4s ease-in-out infinite;
 
       &:last-child {
-        font-size: 5rem;
+        font-size: inherit;
         margin-top: -0.6rem;
         animation-delay: 2s;
+
+        @media (max-width: 430px) {
+          margin-top: -0.2rem;
+        }
       }
     }
   }
@@ -176,6 +192,10 @@
   @media (max-width: 1024px) {
     order: 2;  // Move main info below sidebar on mobile
   }
+
+  @media (max-width: 430px) {
+    margin: 0 -0.5rem;  // Compensa o padding do container
+  }
 }
 
 .section-title {
@@ -194,6 +214,16 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);  // Mantém 2 colunas em tablets
+    gap: 1rem;
+  }
+
+  @media (max-width: 430px) {
+    grid-template-columns: 1fr;  // Uma coluna em mobile pequeno
+    max-width: 100%;
+  }
 }
 
 .schedule-card {
@@ -206,22 +236,39 @@
     padding: 1.5rem;
     text-align: center;
 
+    @media (max-width: 768px) {
+      padding: 1rem;
+    }
+
     i {
       font-size: 2rem;
       color: var(--primary-color);
       margin-bottom: 1rem;
+
+      @media (max-width: 430px) {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
     }
 
     h3 {
       font-size: 1.5rem;
       margin: 0.5rem 0;
       color: #ffffff;
+
+      @media (max-width: 430px) {
+        font-size: 1.2rem;
+      }
     }
 
     p {
       font-size: 1.2rem;
       color: rgba(255, 255, 255, 0.7);
       margin: 0;
+
+      @media (max-width: 430px) {
+        font-size: 1rem;
+      }
     }
   }
 }
@@ -240,8 +287,17 @@
 // Prices Section
 .prices-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); // Três colunas de tamanho igual
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);  // Mantém 3 colunas em tablets
+    gap: 1rem;
+  }
+
+  @media (max-width: 430px) {
+    grid-template-columns: 1fr;  // Uma coluna em mobile pequeno
+  }
 }
 
 .price-card {
@@ -257,18 +313,37 @@
 
   .price-info {
     padding: 1.5rem;
-    text-align: center;
+
+    @media (max-width: 768px) {
+      padding: 1rem;
+    }
+
+    @media (max-width: 430px) {
+      padding: 0.8rem;
+    }
 
     h3 {
       font-size: 1.5rem;
-      margin: 0.5rem 0;
-      color: #ffffff;
+
+      @media (max-width: 768px) {
+        font-size: 1.2rem;
+      }
+
+      @media (max-width: 430px) {
+        font-size: 1.1rem;
+      }
     }
 
-    p {
-      font-size: 1.2rem;
-      color: rgba(255, 255, 255, 0.7);
-      margin: 0;
+    .price-value {
+      font-size: 1.4rem;
+
+      @media (max-width: 768px) {
+        font-size: 1.2rem;
+      }
+
+      @media (max-width: 430px) {
+        font-size: 1.1rem;
+      }
     }
   }
 }
@@ -279,30 +354,46 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
 
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
   .composition-item {
     text-align: left;
     padding: 1.5rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
+
+    @media (max-width: 768px) {
+      padding: 1rem;
+    }
+
+    @media (max-width: 430px) {
+      padding: 0.8rem;
+      gap: 0.5rem;
+    }
 
     i {
       font-size: 1.5rem;
-      color: var(--primary-color);
-      margin-top: 0.2rem;
+
+      @media (max-width: 430px) {
+        font-size: 1.2rem;
+      }
     }
 
     h3 {
       font-size: 1.2rem;
-      margin: 0 0 0.5rem 0;
-      color: #ffffff;
+
+      @media (max-width: 430px) {
+        font-size: 1rem;
+      }
     }
 
     p {
-      color: rgba(255, 255, 255, 0.7);
-      margin: 0;
       font-size: 1rem;
-      line-height: 1.5;
+
+      @media (max-width: 430px) {
+        font-size: 0.9rem;
+      }
     }
   }
 }
@@ -312,9 +403,11 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
 
-  @media (max-width: 768px) {
-    gap: 1rem;
+  @media (max-width: 430px) {
+    gap: 0.75rem;
   }
 }
 
@@ -436,15 +529,45 @@
 .notice-card {
   background: rgba(139, 0, 0, 0.3) !important;
   border: none !important;
+  width: 100%;
+  box-sizing: border-box;
 
   .notice-content {
-    @media (max-width: 768px) {
-      font-size: 0.9rem;
-      text-align: center;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 0.5rem;
 
-      i {
-        display: block;
-        margin-bottom: 0.5rem;
+    @media (max-width: 430px) {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      padding: 0.5rem;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    i {
+      color: #ff6b6b;
+      font-size: 1.2rem;
+
+      @media (max-width: 430px) {
+        font-size: 1rem;
+      }
+    }
+
+    .portal-link {
+      color: #ff6b6b;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 0.25rem;
+
+      &:hover {
+        text-decoration: underline;
       }
     }
   }
@@ -537,5 +660,30 @@
 .sidebar {
   @media (max-width: 1024px) {
     order: 1;  // Move sidebar above main info on mobile
+  }
+
+  @media (max-width: 430px) {
+    margin: 0 -0.5rem;  // Compensa o padding do container
+  }
+}
+
+// Ajustes globais do PrimeNG para mobile
+::ng-deep {
+  @media (max-width: 430px) {
+    .p-card {
+      .p-card-body {
+        padding: 0.75rem !important;
+      }
+    }
+
+    .p-button {
+      padding: 0.5rem !important;
+      font-size: 0.9rem !important;
+    }
+
+    .p-inputtext {
+      font-size: 0.9rem !important;
+      padding: 0.5rem 0.75rem !important;
+    }
   }
 }
