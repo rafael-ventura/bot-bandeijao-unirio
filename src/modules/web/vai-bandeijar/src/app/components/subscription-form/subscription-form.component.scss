@@ -1,40 +1,51 @@
 .action-card {
-  ::ng-deep .p-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 1rem;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: none !important;
+
+  ::ng-deep .p-card-body {
+    padding: 1.2rem !important;
   }
 }
 
 .action-content {
-  text-align: left;
-  padding: 0.5rem;
-
   h3 {
-    margin: 0 0 1rem;
     color: #ffffff;
     font-size: 1.3rem;
+    margin-bottom: 1.2rem;
   }
 }
 
 .subscription-form {
   .input-group {
+    position: relative;
     display: flex;
-    gap: 0.5rem;
-    background: transparent;
-    border-radius: 0.5rem;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2rem;
+    padding: 0.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
     overflow: hidden;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    &:focus-within {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+    }
 
     input {
       flex: 1;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: transparent;
+      border: none;
       color: #ffffff;
-      padding: 0.75rem 1rem;
-      border-radius: 0.5rem;
+      padding: 0.5rem 1.2rem;
       font-size: 1rem;
-      transition: all 0.3s ease;
+      width: calc(100% - 6rem);
 
       &::placeholder {
         color: rgba(255, 255, 255, 0.5);
@@ -42,29 +53,38 @@
 
       &:focus {
         outline: none;
-        border-color: rgba(255, 255, 255, 0.4);
-        background: rgba(255, 255, 255, 0.15);
       }
     }
 
     button {
-      background: #ff6b6b !important;
+      position: relative;
+      min-width: 6rem;
+      height: 2.2rem;
+      margin-left: auto;
+      border-radius: 2rem !important;
+      background: linear-gradient(135deg, #ff6b6b, #ff8585) !important;
       border: none !important;
-      padding: 0.75rem 1.25rem !important;
-      border-radius: 0.5rem !important;
       transition: all 0.3s ease !important;
+      font-size: 1rem !important;
+      padding: 0 1rem !important;
 
-      &:hover {
-        background: #ff8585 !important;
+      &:enabled:hover {
         transform: translateY(-2px);
+        filter: brightness(1.1);
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
       }
 
-      &:active {
-        transform: translateY(0);
+      &:enabled:active {
+        transform: translateY(-1px);
       }
 
       .p-button-icon {
-        font-size: 1.1rem;
+        font-size: 1rem;
+      }
+
+      &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
       }
     }
   }

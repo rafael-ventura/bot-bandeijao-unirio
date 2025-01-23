@@ -14,17 +14,12 @@ export class SocialLinksComponent {
     {
       name: 'GitHub',
       url: 'https://github.com/rafael-ventura',
-      icon: 'assets/github-logo.png'
+      icon: './assets/github-logo.png'
     },
     {
       name: 'LinkedIn',
       url: 'https://www.linkedin.com/in/raf4ael-ventura/',
-      icon: 'assets/linkedin-logo.png'
-    },
-    {
-      name: 'Portfolio',
-      url: 'https://seu-portfolio.com',
-      icon: 'assets/home-logo.png'
+      icon: './assets/linkedin-logo.png'
     }
   ];
 

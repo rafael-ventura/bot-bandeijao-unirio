@@ -24,7 +24,7 @@ export class SubscriptionFormComponent {
       // TODO: Implementar chamada real para API
       await new Promise(resolve => setTimeout(resolve, 1000)); // Simulando chamada
       console.log('Email subscribed:', this.email);
-      this.email = '';
+      this.email = ''; // Limpa o input após sucesso
       // TODO: Adicionar toast de sucesso
     } catch (error) {
       console.error('Subscription error:', error);

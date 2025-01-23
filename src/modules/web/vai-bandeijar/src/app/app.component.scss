@@ -26,16 +26,25 @@
 }
 
 .main-content {
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 0.5rem;
   position: relative;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 }
 
 .content-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 1fr 2fr;
+  gap: 6rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
 }
 
 // Brand Container
@@ -48,13 +57,25 @@
   padding: 2rem;
   border-radius: 1rem;
   backdrop-filter: blur(10px);
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    text-align: center;
+    padding: 1rem;
+  }
 }
 
 .logo-section {
   .logo {
-    width: 200px;
+    width: 150px;
     height: auto;
-    margin-left: -10%;
+    margin-left: -5%;
+
+    @media (max-width: 768px) {
+      width: 100px;
+      margin: 0 auto;
+    }
   }
 }
 
@@ -62,23 +83,78 @@
   .brand-title {
     display: flex;
     flex-direction: column;
-    font-size: 4rem;
+    font-size: 5rem;
     font-weight: 800;
-    line-height: 1.5;
+    line-height: 1.4;
     margin: 0;
+
+    @media (max-width: 1024px) {
+      font-size: 4rem;
+
+      span:last-child {
+        font-size: 4rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      font-size: 3.5rem;
+      line-height: 1.2;
+
+      span:last-child {
+        font-size: 3.5rem;
+        margin-top: -0.4rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      font-size: 2.8rem;
+
+      span:last-child {
+        font-size: 2.8rem;
+        margin-top: -0.3rem;
+      }
+    }
+
     span {
       display: block;
       background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+      background-size: 200% 200%;
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
       text-shadow: 0 0 30px rgba(255, 107, 107, 0.3);
+      animation: gradientShift 5s ease-in-out infinite, pulse 4s ease-in-out infinite;
 
       &:last-child {
-        font-size: 4rem;
-        margin-top: -0.5rem;
+        font-size: 5rem;
+        margin-top: -0.6rem;
+        animation-delay: 2s;
       }
     }
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
@@ -95,6 +171,10 @@
     &:last-child {
       margin-bottom: 0;
     }
+  }
+
+  @media (max-width: 1024px) {
+    order: 2;  // Move main info below sidebar on mobile
   }
 }
 
@@ -232,6 +312,10 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
 }
 
 .action-card {
@@ -352,15 +436,42 @@
 .notice-card {
   background: rgba(139, 0, 0, 0.3) !important;
   border: none !important;
+
+  .notice-content {
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+      text-align: center;
+
+      i {
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
 }
 
-.notice-content {
-  i {
-    color: #ff6b6b;
+// Estilização do p-splitter
+::ng-deep .p-splitter {
+  border: none !important;
+  background: transparent !important;
+
+  .p-splitter-panel {
+    padding: 0 2.5rem;
+
+    &:first-child {
+      padding-left: 0.5rem;
+      min-width: 400px;
+    }
+
+    &:last-child {
+      padding-right: 0.5rem;
+    }
   }
 
-  .portal-link {
-    color: #ff6b6b;
+  .p-splitter-gutter {
+    background: rgba(255, 255, 255, 0.1) !important;
+    width: 2px !important;
+    margin: 0 2rem !important;
   }
 }
 
@@ -368,6 +479,7 @@
 @media (max-width: 1024px) {
   .content-grid {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
   .main-info {
@@ -377,11 +489,29 @@
   .sidebar {
     order: 2;
   }
+
+  ::ng-deep .p-splitter {
+    flex-direction: column !important;
+
+    .p-splitter-panel {
+      padding: 1rem 0.5rem;
+      min-width: unset;
+
+      &:first-child {
+        padding-top: 0;
+      }
+    }
+
+    .p-splitter-gutter {
+      height: 2px !important;
+      margin: 1rem 0 !important;
+    }
+  }
 }
 
 @media (max-width: 768px) {
   .main-content {
-    padding: 1rem;
+    padding: 1rem 0.5rem;
   }
 
   .section-title {
@@ -401,5 +531,11 @@
     i {
       margin: 0 0 1rem 0;
     }
+  }
+}
+
+.sidebar {
+  @media (max-width: 1024px) {
+    order: 1;  // Move sidebar above main info on mobile
   }
 }

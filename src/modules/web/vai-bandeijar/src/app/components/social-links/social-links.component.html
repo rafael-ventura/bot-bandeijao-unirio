@@ -1,11 +1,16 @@
 <p-card styleClass="action-card">
   <div class="action-content">
-    <h3>Redes Sociais</h3>
     <div class="social-badges">
       <button *ngFor="let link of socialLinks"
               class="social-badge"
-              (click)="openLink(link.url)">
-        <img [src]="link.icon" [alt]="link.name" class="social-icon"/>
+              (click)="openLink(link.url)"
+              [attr.aria-label]="link.name">
+        <img [src]="link.icon"
+             [alt]="link.name"
+             class="social-icon"
+             loading="eager"
+             [ngStyle]="{'opacity': '1'}"
+             />
       </button>
     </div>
   </div>

@@ -17,9 +17,12 @@
           />
           <button
             pButton
+            pRipple
             type="submit"
             icon="pi pi-send"
-            [disabled]="!subscriptionForm.form.valid"
+            label="Enviar"
+            [disabled]="!subscriptionForm.form.valid || isSubscribing"
+            [loading]="isSubscribing"
           ></button>
         </div>
       </form>

@@ -1,0 +1,34 @@
+.action-card {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: none !important;
+
+  ::ng-deep .p-card-body {
+    padding: 1.2rem !important;
+  }
+}
+
+.telegram-button {
+  width: 100%;
+  padding: 1rem !important;
+  font-size: 1.1rem !important;
+  background: linear-gradient(135deg, #0088cc, #00a0e3) !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 15px rgba(0, 136, 204, 0.2) !important;
+  border-radius: 2rem !important;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 136, 204, 0.3) !important;
+    filter: brightness(1.1);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+
+  .p-button-icon {
+    font-size: 1.2rem;
+    margin-right: 0.8rem;
+  }
+}
