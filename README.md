@@ -1,7 +1,7 @@
-# bot-bandeijao-unirio
-<!---Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
+# Vai Bandeijar?
 
-<img src="https://user-images.githubusercontent.com/28628701/206945388-52dd86ce-df0d-4fdc-92e2-a06d167c0bc7.png" alt="exemplo imagem" width="400px">
+![image](https://github.com/user-attachments/assets/70ba7824-0061-4adc-aae9-8633fb3c2be0)
+
 
 > Automacao da extracao de dados do cardapio do Restaurante Escola da UNIRIO e das postagens do BOT no Twitter.
 
