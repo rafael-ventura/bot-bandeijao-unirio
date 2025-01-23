@@ -11,22 +11,21 @@ import { MenuDisplayComponent } from './components/menu-display/menu-display.com
 import { TelegramButtonComponent } from './components/telegram-button/telegram-button.component';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ButtonModule,
-    CardModule,
-    InputTextModule,
-    SocialLinksComponent,
-    SubscriptionFormComponent,
-    MenuViewerComponent,
-    MenuDisplayComponent,
-    TelegramButtonComponent
-  ]
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ButtonModule,
+        CardModule,
+        InputTextModule,
+        SocialLinksComponent,
+        SubscriptionFormComponent,
+        MenuViewerComponent,
+        MenuDisplayComponent,
+        TelegramButtonComponent
+    ]
 })
 export class AppComponent {
   title = 'Vai Bandeijar?';

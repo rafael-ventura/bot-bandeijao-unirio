@@ -6,11 +6,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 
 @Component({
-  selector: 'app-subscription-form',
-  templateUrl: './subscription-form.component.html',
-  styleUrls: ['./subscription-form.component.scss'],
-  standalone: true,
-  imports: [CommonModule, FormsModule, ButtonModule, InputTextModule, CardModule]
+    selector: 'app-subscription-form',
+    templateUrl: './subscription-form.component.html',
+    styleUrls: ['./subscription-form.component.scss'],
+    imports: [CommonModule, FormsModule, ButtonModule, InputTextModule, CardModule]
 })
 export class SubscriptionFormComponent {
   email: string = '';

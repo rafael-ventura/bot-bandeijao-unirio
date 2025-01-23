@@ -5,11 +5,10 @@ import { CardModule } from 'primeng/card';
 import { RippleModule } from 'primeng/ripple';
 
 @Component({
-  selector: 'app-telegram-button',
-  templateUrl: './telegram-button.component.html',
-  styleUrls: ['./telegram-button.component.scss'],
-  standalone: true,
-  imports: [CommonModule, ButtonModule, CardModule, RippleModule]
+    selector: 'app-telegram-button',
+    templateUrl: './telegram-button.component.html',
+    styleUrls: ['./telegram-button.component.scss'],
+    imports: [CommonModule, ButtonModule, CardModule, RippleModule]
 })
 export class TelegramButtonComponent {
   openTelegram() {

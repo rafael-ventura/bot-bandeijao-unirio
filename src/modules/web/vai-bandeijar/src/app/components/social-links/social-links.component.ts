@@ -6,7 +6,6 @@ import { CardModule } from 'primeng/card';
     selector: 'app-social-links',
     templateUrl: './social-links.component.html',
     styleUrls: ['./social-links.component.scss'],
-    standalone: true,
     imports: [CommonModule, CardModule]
 })
 export class SocialLinksComponent {
