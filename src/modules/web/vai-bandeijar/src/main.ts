@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
-import {} from '@angular/common/http';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -16,8 +15,7 @@ bootstrapApplication(AppComponent, {
       FormsModule,
       ButtonModule,
       CardModule,
-      InputTextModule,
-      HttpClientModule
+      InputTextModule
     ),
     provideAnimations()
   ]

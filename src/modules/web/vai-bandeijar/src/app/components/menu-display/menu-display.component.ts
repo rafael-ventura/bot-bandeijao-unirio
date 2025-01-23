@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { CardModule } from 'primeng/card';
 
 @Component({
-    selector: 'app-section-bandeijao',
-    templateUrl: './menu-display.component.html',
-    styleUrls: ['./menu-display.component.scss'],
-    imports: [CommonModule, CardModule]
+  selector: 'app-section-bandeijao',
+  templateUrl: './menu-display.component.html',
+  styleUrls: ['./menu-display.component.scss'],
+  standalone: true,
+  imports: [CommonModule, CardModule]
 })
 export class MenuDisplayComponent {
   mealSchedule = {

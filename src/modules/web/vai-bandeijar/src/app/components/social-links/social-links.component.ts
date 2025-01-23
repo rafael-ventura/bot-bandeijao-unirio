@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { CardModule } from 'primeng/card';
 
 @Component({
-    selector: 'app-social-links',
-    templateUrl: './social-links.component.html',
-    styleUrls: ['./social-links.component.scss'],
-    imports: [CommonModule, CardModule]
+  selector: 'app-social-links',
+  templateUrl: './social-links.component.html',
+  styleUrls: ['./social-links.component.scss'],
+  standalone: true,
+  imports: [CommonModule, CardModule]
 })
 export class SocialLinksComponent {
   socialLinks = [
