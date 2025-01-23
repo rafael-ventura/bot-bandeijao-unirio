@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
-import { HttpClientModule } from '@angular/common/http';
+import {} from '@angular/common/http';
 
 bootstrapApplication(AppComponent, {
   providers: [
