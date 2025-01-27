@@ -1,7 +1,6 @@
 import nodemailer from 'nodemailer';
 import { config } from '../config';
-import { Logger } from '../utils/logger';
-import { WeeklyMenu } from '../types/menu';
+import { Logger } from '../shared/utils/logger.js';
 
 export class EmailService {
   private transporter: nodemailer.Transporter;
@@ -18,13 +17,13 @@ export class EmailService {
     });
   }
 
-  async sendWeeklyMenu(to: string, menu: WeeklyMenu): Promise<void> {
+  async sendWeeklyMenu(to: string): Promise<void> {
     try {
       await this.transporter.sendMail({
         from: `"Vai Bandeijar" <${config.email.user}>`,
         to,
-        subject: `Cardápio da Semana - ${menu.week}`,
-        html: await this.generateWeeklyMenuHtml(menu),
+        subject: `Cardápio da Semana - `,
+        html: await this.generateWeeklyMenuHtml(),
       });
       Logger.info(`Weekly menu sent to ${to}`);
     } catch (error) {
@@ -33,8 +32,8 @@ export class EmailService {
     }
   }
 
-  private async generateWeeklyMenuHtml(menu: WeeklyMenu): Promise<string> {
+  private async generateWeeklyMenuHtml(): Promise<string> {
     // TODO: Implementar template HTML
     return '<h1>Cardápio da Semana</h1>';
   }
-} 
+}
