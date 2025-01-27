@@ -26,7 +26,7 @@ jobs:
       name: github-pages
 
     steps:
-      - name: Checkout
+      - name: Checkout Code
         uses: actions/checkout@v3
 
       - name: Setup Node.js
@@ -39,15 +39,15 @@ jobs:
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
 
-      - name: Build
+      - name: Build Project
         run: npm run build
         env:
           NODE_ENV: production
 
-      - name: Setup Pages
+      - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
 
-      - name: Upload artifact
+      - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: src/modules/web/vai-bandeijar/dist/vai-bandeijar/browser
