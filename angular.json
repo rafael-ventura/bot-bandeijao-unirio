@@ -17,9 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": {
-              "base": "dist/vai-bandeijar"
-            },
+            "outputPath": "dist/vai-bandeijar",
             "index": "src/index.html",
             "polyfills": [
               "zone.js"

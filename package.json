@@ -7,8 +7,8 @@
     "scrape:image": "node src/modules/scraper/scrape.js",
     "web:build": "ng build",
     "start": "ng serve",
-    "build": "ng build --base-href /bot-bandeijao-unirio/",
-    "watch": "ng build --watch --configuration development",
+    "build": "ng build --configuration=production",
+    "watch": "ng build --watch --configuration=development",
     "test": "ng test"
   },
   "keywords": [],
