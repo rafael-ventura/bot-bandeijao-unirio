@@ -5,8 +5,7 @@
   "scripts": {
     "scrape": "node src/modules/scraper/index.js",
     "scrape:image": "node src/modules/scraper/scrape.js",
-    "web:start": "cd src/modules/web && ng serve",
-    "web:build": "cd src/modules/web && ng build",
+    "web:build": "ng build",
     "start": "ng serve",
     "build": "ng build --base-href /bot-bandeijao-unirio/",
     "watch": "ng build --watch --configuration development",
