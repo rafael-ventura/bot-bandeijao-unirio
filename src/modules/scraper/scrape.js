@@ -12,32 +12,53 @@ class MenuScraper {
   async scrapeMenu() {
     try {
       Logger.info('Fetching restaurant page...');
-      const response = await fetch(this.RESTAURANT_URL);
+      const response = await fetch(this.RESTAURANT_URL, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
+        }
+      });
       const html = await response.text();
 
       const $ = cheerio.load(html);
-      const menuImage = $('#parent-fieldname-text-f70fdc45550a457293b7aae9cc35d0fb img.image-inline');
 
-      if (!menuImage.length) {
-        throw new Error('Menu image not found in restaurant page');
+      // 🔥 Encontra o link para o cardápio (agora um <a> ao invés de <img>)
+      const menuLink = $('a[href*="CardpioRE"]').attr('href');
+
+      if (!menuLink) {
+        throw new Error('Menu link not found on the page');
       }
 
-      const imageUrl = menuImage.attr('src');
-      const dateStr = menuImage.attr('alt');
+      const fullMenuLink = `https://www.unirio.br${menuLink}`;
+      Logger.info(`Found menu link: ${fullMenuLink}`);
 
-      if (!imageUrl || !dateStr) {
-        throw new Error('Image URL or date not found');
+      // 🔥 Baixa a página do link para pegar a imagem real
+      const menuResponse = await fetch(fullMenuLink, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
+        }
+      });
+      const menuHtml = await menuResponse.text();
+      const $$ = cheerio.load(menuHtml);
+
+      // 🔥 Encontra a URL real da imagem dentro da página do cardápio
+      const imageUrl = $$('img').attr('src');
+
+      if (!imageUrl) {
+        throw new Error('Menu image not found after following the link');
       }
 
-      Logger.info(`Found menu image: ${imageUrl}`);
+      const fullImageUrl = `https://www.unirio.br${imageUrl}`;
+      Logger.info(`Final menu image URL: ${fullImageUrl}`);
 
+      // 🔥 Nomeia a imagem
+      const dateStr = path.basename(imageUrl, path.extname(imageUrl));
       const imageDownloader = new ImageDownloaderService({
-        outputDir: 'cardapiosHist' // Caminho para o histórico
+        outputDir: 'cardapiosHist'
       });
 
       const { historyPath, assetsPath } = await imageDownloader.downloadImage(
-        imageUrl,
-        `cardapio_${dateStr.replace(/\s+/g, '-')}.jpg`
+        fullImageUrl,
+        `cardapio_${dateStr}.jpg`
       );
 
       return { weekId: dateStr, savedPath: historyPath, assetsPath: assetsPath };
