@@ -75,5 +75,10 @@ yarn-error.log
 testem.log
 /typings
 
+# .NET
+bin/
+obj/
+*.user
+
 # System files
 
